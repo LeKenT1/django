@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_login.css' %}">
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_username">Nom d'utilisateur :</label>
+        <input type="text" id="id_username" name="username">
+        <label for="id_password">Mot de passe:</label>
+        <input type="password" id="id_password" name="password">
+        <button type="submit">Se connecter</button>
+    </form>
+    <p>Vous n'avez pas de compte ? <a href="http://127.0.0.1:8000/travel/signup/">Inscrivez-vous !</a></p>
+</body>
+</html>

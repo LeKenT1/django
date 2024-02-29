@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix reservation</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Vos reservations</h1>
+        <div class="links">
+            <a href="{% url 'mes_reservations_voyages' %}">Mes voyages</a>
+            <a href="{% url 'mes_reservations_hebergements' %}">Mes hebergements</a>
+        </div>
+        <a href="{% url 'index' %}" class="retour">Retour</a>
+    </div>
+</body>
+</html>

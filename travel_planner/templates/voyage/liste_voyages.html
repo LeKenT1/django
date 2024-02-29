@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des voyages</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Liste des voyages :</h1>
+        <div class="search-container">
+            <form action="{% url 'search_voyage' %}" method="GET">
+                <input type="text" placeholder="Recherche de voyage..." name="q">
+                <button type="submit">Rechercher</button>
+            </form>
+        </div>
+        <div>
+            <ul>
+                {% for voyage in voyages %}
+                    <li><a href="{% url 'detail_voyage' voyage.id %}">{{ voyage.titre }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="{% url 'index' %}" class="retour">Retour</a>
+    </div>
+</body>
+</html>

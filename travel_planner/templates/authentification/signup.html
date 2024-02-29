@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_signup.css' %}">
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Inscription</button>
+        <p>Vous avez déjà un compte ? <a href="http://127.0.0.1:8000/travel/login/">Connectez-vous !</a></p>
+    </form>
+</body>
+</html>

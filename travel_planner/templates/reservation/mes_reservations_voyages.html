@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Réservations de voyage</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Mes Réservations de voyage:</h1>
+        <ul>
+            {% for reservation in reservations %}
+                {% if reservation.voyage %}
+                <li>
+                    <a href="{% url 'detail_reservation'  reservation.voyage.id %}"><strong>{{ reservation.voyage }}</strong> le {{reservation.date_reservation|date:"d/m à H:i" }}</a>
+                    <a href="{% url 'supprimer_reservation'  reservation.id %}" class="cancel">Annuler</a>
+                </li>
+                {% endif %}
+            {% empty %}
+                <li>Aucune réservation trouvée</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'choix_reservation' %}" class="retour">Retour</a>
+    </div>
+</body>
+</html>

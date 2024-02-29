@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du voyage</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Détails du voyage :</h1>
+        <div class="details-box">
+            <h2>{{ voyage.titre }}</h2>
+            <br>
+            <p><strong>Date de départ:</strong> {{ voyage.date_depart|date:"d/m/Y à H:i" }}</p>
+            <p><strong>Date de retour:</strong> {{ voyage.date_arrivee|date:"d/m/Y à H:i" }}</p>
+            <br>
+            <p><strong>Départ:</strong> {{ voyage.lieu_depart }}</p>
+            <p><strong>Arrivée:</strong> {{ voyage.lieu_arrivee }}</p>
+            <br>
+            {% if voyage.mode_transport %}
+                {% if voyage.mode_transport == "TR" %}
+                    <p><strong>Mode de transport:</strong> Train</p>
+                {% elif voyage.mode_transport == "AV" %}
+                    <p><strong>Mode de transport:</strong> Avion</p>
+                {% elif voyage.mode_transport == "VO" %}
+                    <p><strong>Mode de transport:</strong> Voiture</p>
+                {% else %}
+                    <p><strong>Mode de transport:</strong> Inconnu</p>
+                {% endif %}
+            {% endif %}
+            <br>
+            <p><strong>Prix:</strong> {{ voyage.prix }} €</p>
+            <form action="{% url 'ajouter_reservation_voyage' voyage.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="add">Ajouter à mes réservations</button>
+            </form>
+        </div>
+        <a href="{% url 'liste_voyages' %}" class="retour">Retour</a>
+    </div>
+</body>
+</html>
