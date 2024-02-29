@@ -91,6 +91,18 @@ def detail_hebergement(request, hebergement_id):
     return render(request, 'hebergement/detail_hebergement.html', {'hebergement': hebergement})
 
 @login_required
+def destination(request):
+    return render(request, 'destination/destination.html',)
+
+@login_required
+def search_destination(request):
+    query = request.GET.get('q')
+    voyages = Voyage.objects.filter(Q(ville_depart__icontains=query) | Q(ville_arrivee__icontains=query))
+    hebergements = Hebergement.objects.filter(ville__icontains=query)
+
+    return render(request, 'destination/destination.html', {'voyages': voyages, 'hebergements': hebergements, 'query': query}) 
+
+@login_required
 def index(request):
     username = request.user.username
     return render(request, 'index.html', {'username': username})
