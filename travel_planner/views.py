@@ -7,6 +7,7 @@ from django.urls import reverse
 from .models import Hebergement, Voyage, Reservation
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib.auth import logout as django_logout
 
 @login_required
 def liste_voyages(request):
@@ -32,9 +33,14 @@ def detail_voyage(request, voyage_id):
     return render(request, 'voyage/detail_voyage.html', {'voyage': voyage})
 
 @login_required
-def detail_reservation(request, voyage_id):
+def detail_reservation_voyage(request, voyage_id):
     voyage = Voyage.objects.get(id=voyage_id)
-    return render(request, 'reservation/detail_reservation.html', {'voyage': voyage})
+    return render(request, 'reservation/detail_reservation_voyage.html', {'voyage': voyage})
+
+@login_required
+def detail_reservation_hebergement(request, hebergement_id):
+    hebergement = Hebergement.objects.get(id=hebergement_id)
+    return render(request, 'reservation/detail_reservation_hebergement.html', {'hebergement': hebergement})
 
 @login_required
 def choix_reservation(request):
@@ -55,7 +61,7 @@ def mes_reservations_hebergements(request):
 def supprimer_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, pk=reservation_id)
     reservation.delete()
-    return redirect('mes_reservations_voyages')
+    return redirect('choix_reservation')
 
 @login_required
 def ajouter_reservation_voyage(request, voyage_id):
@@ -130,6 +136,13 @@ def user_signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'authentification/signup.html', {'form': form})
+
+def redirect_login(request):
+    return render(request, 'dashboard.html')
+
+def my_logout(request):
+    django_logout(request)
+    return redirect('login')
 
 def dashboard(request):
     return render(request, 'dashboard.html')

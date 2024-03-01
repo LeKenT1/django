@@ -14,7 +14,7 @@
             {% for reservation in reservations %}
                 {% if reservation.voyage %}
                 <li>
-                    <a href="{% url 'detail_reservation'  reservation.voyage.id %}"><strong>{{ reservation.voyage }}</strong> le {{reservation.date_reservation|date:"d/m à H:i" }}</a>
+                    <a href="{% url 'reservation_voyage'  reservation.voyage.id %}"><strong>{{ reservation.voyage }}</strong> le {{reservation.date_reservation|date:"d/m à H:i" }}</a>
                     <a href="{% url 'supprimer_reservation'  reservation.id %}" class="cancel">Annuler</a>
                 </li>
                 {% endif %}

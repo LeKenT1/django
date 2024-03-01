@@ -27,7 +27,7 @@ class Voyage(models.Model):
         return self.date_retour is None
 
     def __str__(self):
-        return self.titre 
+        return self.titre
 
     
 class Hebergement(models.Model):

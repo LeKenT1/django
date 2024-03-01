@@ -14,10 +14,10 @@
             <h2>{{ voyage.titre }}</h2>
             <br>
             <p><strong>Date de départ:</strong> {{ voyage.date_depart|date:"d/m/Y à H:i" }}</p>
-            <p><strong>Date de retour:</strong> {{ voyage.date_arrivee|date:"d/m/Y à H:i" }}</p>
+            <p><strong>Date d'arrivée:</strong> {{ voyage.date_arrivee|date:"d/m/Y à H:i" }}</p>
             <br>
-            <p><strong>Départ:</strong> {{ voyage.lieu_depart }}</p>
-            <p><strong>Arrivée:</strong> {{ voyage.lieu_arrivee }}</p>
+            <p><strong>Départ:</strong> {{ voyage.ville_depart }} - {{ voyage.lieu_depart }}</p>
+            <p><strong>Arrivée:</strong> {{ voyage.ville_arrivee }} - {{ voyage.lieu_arrivee }}</p>
             <br>
             {% if voyage.mode_transport %}
                 {% if voyage.mode_transport == "TR" %}
